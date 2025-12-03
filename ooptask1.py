@@ -67,8 +67,9 @@ car2 = Car("Mazda", "CX5", 2020, 67)
 
 car1.refuel(20)
 car2.refuel(45)
-
+car1.start()
 car1.drive(100)
+
 
 car1.display_car_info()
 # car2.display_car_info()
