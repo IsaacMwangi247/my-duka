@@ -14,14 +14,14 @@ class Car:
         self.year = year
         self.fuel_capacity = fuel_capacity
         self.fuel_level = 0  # starts empty
-        self.is_running = False
+        self.is_running = False #Engine is off at the beginning
 
     def start(self):
         if self.fuel_level > 0:
             self.is_running = True
-            print(f"{self.brand} {self.model} started.")
+            print(f"{self.brand} {self.model} has started.")
         else:
-            print("Cannot start. Fuel tank is empty!")
+            print("Car cannot start since Fuel tank is empty!")
 
     def stop(self):
         if self.is_running:
@@ -45,7 +45,7 @@ class Car:
         if not self.is_running:
             print("Start the car first!")
             return
-        fuel_needed = distance * 0.1  # assume 0.1 liters per km
+        fuel_needed = distance * 0.1  # assume 1 liter per 10km
         if fuel_needed > self.fuel_level:
             print("Not enough fuel to drive that distance.")
         else:
@@ -60,5 +60,17 @@ class Car:
         print(f"Fuel Capacity: {self.fuel_capacity} liters")
         print(f"Fuel Level: {self.fuel_level} liters")
         print(f"Is Running: {self.is_running}")
+
+
+car1 = Car("Subaru", "Forester", 2019, 63)
+car2 = Car("Mazda", "CX5", 2020, 67)
+
+car1.refuel(20)
+car2.refuel(45)
+
+car1.drive(100)
+
+car1.display_car_info()
+# car2.display_car_info()
 
        
