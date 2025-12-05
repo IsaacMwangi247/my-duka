@@ -9,56 +9,38 @@ def get_products():
     products = cur.fetchall()
     return products
 
-def insert_products():
-    cur.execute("insert into products(name, buying_price, selling_price) values('shoes', 500,900)")
+products = get_products()    
+
+def insert_products(values):
+    cur.execute(f"insert into products(name,buying_price,selling_price) values{values}")
     conn.commit()
 
-product1 = ('milk', 50, 60)
-product2 = ('tea', 30, 40)
-
-insert_products(product1)
-insert_products(product2)
+# my_product = ('Samsung', 100000, 120000)
+# my_product2 = ('Iphone', 200000, 250000)
+# insert_products(my_product)
+# insert_products(my_product2)
+print(products)
 
 def insert_sales(values):
-    cur.execute(f"insert into sale(pid, quantity) values{values}")
+    cur.execute(f"insert into sales(pid, quantity)values{values}")
     conn.commit()
-sales1 = (2,50)
-sales2 = (4,30)
-insert_sales(sales1)
-insert_sales(sales2)
+
+# my_sale = (1, 700)
+# my_sale2 = (2, 49)
+# insert_sales(my_sale)
+# insert_sales(my_sale2)
+
+def insert_sales_2(values):
+    cur.execute("insert into sales(pid,quantity)values(%s,%s)",(values))
+    conn.commit()
+
+# sale_1 = (49,200)
+# insert_sales_2(sale_1)
 
 def get_sales():
-    cur.
+    cur.execute("select * from sales")
+    sales = cur.fetchall()
+    return sales
 
-
-# import psycopg2
-
-# def insert_two_sales():
-#     # Connect to your PostgreSQL database
-#     conn = psycopg2.connect(host='localhost',port='5432', user='postgres',password='1234',dbname='my_duka')
-
-#     cur = conn.cursor()
-
-#     # Define the insert query
-#     insert_query = sql.SQL("""
-#         INSERT INTO sales (pid, quantity)
-#         VALUES (%s, %s)
-#     """)
-
-#     # Two sales records
-#     sales_data = [
-#         (2, 50),
-#         (5, 60)
-#     ]
-
-#     # Execute insert for both records
-#     cur.executemany(insert_query, sales_data)
-
-#     # Commit changes
-#     conn.commit()
-    
-#     # Close cursor and connection
-#     cur.close()
-#     conn.close()
-
-    
+sales = get_sales()
+print(sales)
