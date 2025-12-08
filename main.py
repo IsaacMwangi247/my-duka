@@ -11,25 +11,28 @@ def home():
 @app.route('/products')
 def fetch_products():
     products = get_products()
-
-    return render_template("products.html", products = products)
+    return render_template("products.html")
 
 
 @app.route('/sales')
 def fetch_sales():
     sales = get_sales()
-    return render_template("sales.html", sales= sales)
+    return render_template("sales.html")
 
 @app.route('/dashboard')
 def dashboard():
-    return "This is the dashboard route"
+    return render_template("dashboard.html")
 
 @app.route('/login')
 def login():
-    return "This is the login route"
+    return render_template("login.html")
 
 @app.route('/register')
 def register():
-    return "This is the register route"
+    return render_template("register.html")
 
-app.run()
+# @app.route('/test/<int:user_id>')
+# def test(user_id):
+#     return {"id":user_id}
+
+app.run(debug=True)

@@ -19,7 +19,7 @@ def insert_products(values):
 # my_product2 = ('Iphone', 200000, 250000)
 # insert_products(my_product)
 # insert_products(my_product2)
-print(products)
+# print(products)
 
 def insert_sales(values):
     cur.execute(f"insert into sales(pid, quantity)values{values}")
@@ -42,5 +42,5 @@ def get_sales():
     sales = cur.fetchall()
     return sales
 
-sales = get_sales()
-print(sales)
+# sales = get_sales()
+# print(sales)

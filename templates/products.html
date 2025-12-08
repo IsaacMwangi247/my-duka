@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
-</head>
-<body>
-    <h2>This is my products table</h2>
-    <p>here is the table</p>
-    {% for x in products %}
-    <p>{{x}}</p>
-    {% endfor %}
-   
+{% extends "base.html" %}
 
-    
-</body>
-</html>
+{% block title %} Products {% endblock %}
+
+{% block content %} 
+
+<div>
+    <div>
+        <p>Products page</p>
+    </div>
+</div>
+{% endblock %}
