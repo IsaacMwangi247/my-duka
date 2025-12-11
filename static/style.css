@@ -1,13 +1,28 @@
 body {
-    background-color: #dee2e6;
+    
     
 }
+
 .navbar {
     margin-top: 10px;
-    font-size: large;
-    
-       
+    font-size: large;   
 }
+.navbar-brand {
+    
+    font-weight: 600;
+}
+.navbar .nav-link:hover {
+    background-color: #14213d;
+    color: white;
+    
+    
+}
+.content {
+    width: 90%;
+    margin: 0 auto;
+
+}
+
 
 p {
     font-size: large;
@@ -16,9 +31,13 @@ p {
 
 /* Footer */
 .footer {
-    background: #e9ecef;
     padding: 40px 0 20px;
-    border-top: 1px solid #eee;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-top: 0;
+    background-color: aliceblue;
+   
+    
 }
 
 .footer-brand {

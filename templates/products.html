@@ -1,87 +1,48 @@
-{% extends "base.html" %} 
-{% block title %} Products {% endblock %} 
+{% extends "base.html" %}
+{% block title %} Products {% endblock %}
 {% block content %}
 
 <div>
+  <hr>
   <div>
-    <p style="margin: 10px 0;">Products page</p>
+    <h3 style="margin: 10px 0; text-align: center;">Products Page</h3>
   </div>
+  <hr>
   <div>
     <!-- Button trigger modal -->
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-      style="border-radius: 40px;"
-    >
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"
+      style="border-radius: 40px">
       Add Products
     </button>
 
     <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">
               Add products here
             </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="/add_products" method = "post">
+            <form action="/add_products" method="post">
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Product name</label
-                >
-                <input
-                  type="text"
-                  name = "product_name"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                />
+                <label for="exampleInputEmail1" class="form-label">Product name</label>
+                <input type="text" name="product_name" class="form-control" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" />
               </div>
               <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >Buying Price</label
-                >
-                <input
-                  type="number"
-                  name = "buying_price"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                />
+                <label for="exampleInputPassword1" class="form-label">Buying Price</label>
+                <input type="number" name="buying_price" class="form-control" id="exampleInputPassword1" />
               </div>
 
               <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >Selling Price</label
-                >
-                <input
-                  type="number"
-                  name = "selling_price"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                />
+                <label for="exampleInputPassword1" class="form-label">Selling Price</label>
+                <input type="number" name="selling_price" class="form-control" id="exampleInputPassword1" />
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                   Close
                 </button>
                 <button type="submit" class="btn btn-primary">
@@ -89,15 +50,14 @@
                 </button>
               </div>
             </form>
-
           </div>
         </div>
       </div>
     </div>
   </div>
   <div>
-    <table id="example" class="table table-striped">
-      <thead>
+    <table id="example" class="table table-striped table-bordered table-hover">
+      <thead class="table-dark">
         <tr>
           <th>Product ID</th>
           <th>Product Name</th>

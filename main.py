@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for #first import the Flask object from the flask package
-from database import get_products, insert_products, insert_sales
-from database import get_sales
+from database import get_products, get_sales, insert_products, insert_sales
+
 
 app = Flask(__name__) #create flask application instance with the name app
 
@@ -26,13 +26,14 @@ def add_products():
 @app.route('/sales')
 def fetch_sales():
     sales = get_sales()
-    return render_template("sales.html", sales = sales)
+    products = get_products()
+    return render_template("sales.html", sales = sales, products = products)
 
 @app.route('/add_sales', methods = ['GET', 'POST'])
 def add_sales():
-    pid = request.form["pid"]
+    product_id = request.form["product_id"]
     quantity = request.form["quantity"]
-    new_sale = (pid, quantity)
+    new_sale = (product_id, quantity)
     insert_sales(new_sale)
     return redirect(url_for('fetch_sales'))
 

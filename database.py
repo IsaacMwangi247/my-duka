@@ -30,9 +30,9 @@ def insert_sales(values):
 # insert_sales(my_sale)
 # insert_sales(my_sale2)
 
-def insert_sales_2(values):
-    cur.execute("insert into sales(pid,quantity)values(%s,%s)",(values))
-    conn.commit()
+# def insert_sales_2(values):
+#     cur.execute("insert into sales(pid,quantity)values(%s,%s)",(values))
+#     conn.commit()
 
 # sale_1 = (49,200)
 # insert_sales_2(sale_1)

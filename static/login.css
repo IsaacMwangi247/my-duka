@@ -1,0 +1,30 @@
+.bg-image-vertical {
+position: relative;
+overflow: hidden;
+background-repeat: no-repeat;
+background-position: right center;
+background-size: auto 100%;
+}
+
+@media (min-width: 1025px) {
+.h-custom-2 {
+/* height: 100%; */
+}
+}
+.new-border {
+    border: 3px solid #a99985;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    
+}
+.btn {
+    background-color: #a99985;
+    border: #a99985;
+    border-radius: 40px;
+    width: 100%;
+}
+legend {
+  font-weight: bold;
+  color: #007bff;
+}
+
