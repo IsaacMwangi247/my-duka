@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for #first import the Flask object from the flask package
-from database import get_products, get_sales, insert_products, insert_sales
+from database import get_products, get_sales, insert_products, insert_sales, available_stock, get_stock, insert_stock
 
 
 app = Flask(__name__) #create flask application instance with the name app
@@ -8,11 +8,14 @@ app = Flask(__name__) #create flask application instance with the name app
 def home():
     return render_template("index.html")
 
+
+#getting products
 @app.route('/products')
 def fetch_products():
     products = get_products()
     return render_template("products.html", products = products)
 
+#posting products
 @app.route('/add_products', methods = ['GET', 'POST'])
 def add_products():
     product_name = request.form["product_name"]
@@ -22,20 +25,47 @@ def add_products():
     insert_products(new_product)
     return redirect(url_for('fetch_products'))
 
-# add sales
+# getting sales
 @app.route('/sales')
 def fetch_sales():
     sales = get_sales()
     products = get_products()
     return render_template("sales.html", sales = sales, products = products)
 
-@app.route('/add_sales', methods = ['GET', 'POST'])
-def add_sales():
-    product_id = request.form["product_id"]
+
+#posting sales
+@app.route('/add_sale', methods = ['GET', 'POST'])
+def add_sale():
+    pid = request.form["pid"]
     quantity = request.form["quantity"]
-    new_sale = (product_id, quantity)
+    new_sale = (pid, quantity)
+    check_stock = available_stock(pid)
+    if check_stock < float(quantity):
+        print("Insufficient stock")
+        return redirect(url_for('fetch_sales'))
     insert_sales(new_sale)
     return redirect(url_for('fetch_sales'))
+
+#getting stock
+@app.route('/stocks')
+def fetch_stock():
+    stock = get_stock()
+    products = get_products()
+    return render_template("stocks.html", stock = stock, products = products)
+
+#posting stock
+@app.route('/add_stock', methods = ['GET', 'POST'])
+def add_stock():
+    pid = request.form["product_id"]
+    quantity = request.form["quantity"]
+    new_stock = (pid, quantity)
+    check_stock = available_stock(pid)
+    if check_stock < float(quantity):
+        print("Insufficient stock")
+        return redirect(url_for('fetch_stock'))
+    insert_stock(new_stock)
+    return redirect(url_for('fetch_stock'))
+
 
 
 @app.route('/dashboard')

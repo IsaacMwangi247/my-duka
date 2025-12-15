@@ -31,12 +31,19 @@ p {
 
 /* Footer */
 .footer {
-    padding: 40px 0 20px;
+    /* padding: 40px 0 20px; */
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin-top: 0;
     background-color: aliceblue;
-   
+     
+}
+.col-md-6 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    
     
 }
 
@@ -44,7 +51,7 @@ p {
     font-size: 1.5rem;
     font-weight: 600;
     color: #333;
-    margin-bottom: 15px;
+    
 }
 
 .footer-text {
@@ -53,9 +60,7 @@ p {
     max-width: 300px;
 }
 
-.social-links {
-    margin: 20px 0;
-}
+
 
 .social-link {
     color: #6c757d;
@@ -90,7 +95,6 @@ p {
 .copyright {
     color: #6c757d;
     font-size: 0.85rem;
-    margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid #eee;
 }
