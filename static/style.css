@@ -13,10 +13,10 @@ body {
 }
 .navbar .nav-link:hover {
     background-color: #14213d;
-    color: white;
-    
-    
+    color: white;  
 }
+
+
 .content {
     width: 90%;
     margin: 0 auto;
@@ -98,5 +98,6 @@ p {
     padding-top: 20px;
     border-top: 1px solid #eee;
 }
+
 
 

@@ -1,8 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for #first import the Flask object from the flask package
-from database import get_products, get_sales, insert_products, insert_sales, available_stock, get_stock, insert_stock
+from flask import Flask, render_template, request, redirect, url_for, flash #first import the Flask object from the flask package
+from database import get_products, get_sales, insert_products, insert_sales, available_stock, get_stock, insert_stock, insert_users, check_user_exists
 
 
 app = Flask(__name__) #create flask application instance with the name app
+
+
+app.secret_key = '3tbrkiuhngjit66'
+
+
 
 @app.route('/') # this is a decorator which turns a regular python function into a flask view function, which converts the return value to a http response 
 def home():
@@ -23,6 +28,7 @@ def add_products():
     selling_price = request.form["selling_price"]
     new_product = (product_name, buying_price, selling_price)
     insert_products(new_product)
+    flash("Product added successfully", "success")
     return redirect(url_for('fetch_products'))
 
 # getting sales
@@ -41,17 +47,18 @@ def add_sale():
     new_sale = (pid, quantity)
     check_stock = available_stock(pid)
     if check_stock < float(quantity):
-        print("Insufficient stock")
+        flash("Insufficient stock", "danger")
         return redirect(url_for('fetch_sales'))
     insert_sales(new_sale)
+    flash("Sale completed successfully", "success")
     return redirect(url_for('fetch_sales'))
 
 #getting stock
 @app.route('/stocks')
 def fetch_stock():
-    stock = get_stock()
+    stocks = get_stock()
     products = get_products()
-    return render_template("stocks.html", stock = stock, products = products)
+    return render_template("stocks.html", stocks = stocks, products = products)
 
 #posting stock
 @app.route('/add_stock', methods = ['GET', 'POST'])
@@ -59,29 +66,52 @@ def add_stock():
     pid = request.form["product_id"]
     quantity = request.form["quantity"]
     new_stock = (pid, quantity)
-    check_stock = available_stock(pid)
-    if check_stock < float(quantity):
-        print("Insufficient stock")
-        return redirect(url_for('fetch_stock'))
     insert_stock(new_stock)
+    flash("Stock added successfully", "success")
     return redirect(url_for('fetch_stock'))
-
-
 
 @app.route('/dashboard')
 def dashboard():
+    
     return render_template("dashboard.html")
 
-@app.route('/login')
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        email = request.form["email"]
+        password = request.form["password"]
+        registered_user = check_user_exists(email)
+        if not registered_user:
+            flash('User does not exist, please register', 'danger')
+            return redirect(url_for('register'))
+        else:
+            if password == registered_user[-1]:
+                flash('Login successful', 'success')
+                return redirect(url_for('dashboard'))
+            else:
+                flash('Incorrect password, try again', 'danger')
+
     return render_template("login.html")
 
-@app.route('/register')
+
+#posting users
+@app.route('/register', methods = ['GET',"POST"])
 def register():
+    if request.method == 'POST':
+        full_name = request.form['name']
+        email = request.form['email']
+        phone_number = request.form['phone']
+        password = request.form['password']
+
+        existing_user = check_user_exists(email)
+        if not existing_user:
+            new_user = (full_name, email, phone_number, password)
+            insert_users(new_user)
+            flash("User registered successfully", 'success')
+            return redirect(url_for('login'))
+        else:
+            flash("User with this email exists, please login", 'danger')
     return render_template("register.html")
 
-# @app.route('/test/<int:user_id>')
-# def test(user_id):
-#     return {"id":user_id}
 
 app.run(debug=True)

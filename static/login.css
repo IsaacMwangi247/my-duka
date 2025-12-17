@@ -12,9 +12,11 @@ background-size: auto 100%;
 }
 }
 .new-border {
-    border: 3px solid #a99985;
+    border: 5px solid #a99985;
     margin-top: 1rem;
     margin-bottom: 0;
+    height: 88vh;
+    overflow: hidden;
     
 }
 .btn {
@@ -26,5 +28,10 @@ background-size: auto 100%;
 legend {
   font-weight: bold;
   color: #007bff;
+}
+.img-fluid{
+  height: auto;
+  width: 100%;
+  
 }
 
