@@ -58,28 +58,44 @@ def check_user_exists(email):
     return user
 
 # sales per product
-def get_salesperproduct():
-    cur.execute("SELECT p.id, p.name, SUM(s.quantity * p.selling_price) AS total_sales FROM products p JOIN sales s ON p.id = s.pid GROUP BY p.id, p.name ORDER BY total_sales DESC;")
-    salesperproduct = cur.fetchall()
-    return salesperproduct
+
+def sales_per_product():
+    cur.execute("""select products.name as p_name , sum(sales.quantity * products.selling_price) as total_sales from products join sales
+    on sales.pid = products.id group by(p_name)
+     """)
+    product_sales = cur.fetchall()
+    return product_sales
 
 # sales per day
-def get_salesperday():
-    cur.execute("SELECT DATE(s.created_at) AS sale_date, SUM(s.quantity * p.selling_price) AS total_sales FROM sales s JOIN products p ON s.pid = p.id GROUP BY DATE(s.created_at) ORDER BY sale_date;")
-    salesperday = cur.fetchall()
-    return salesperday
+
+def sales_per_day():
+    cur.execute("""
+    select sum(sales.quantity * products.selling_price ) as total_sales ,sales.created_at as date from sales join products 
+            on products.id = sales.pid  group by(date)
+    """)
+    daily_sales = cur.fetchall()
+    return daily_sales
 
 # profit per day
-def get_profitsperday():
-    cur.execute("SELECT DATE(s.created_at) AS sale_date, SUM((p.selling_price - p.buying_price) * s.quantity) AS total_profit FROM sales s JOIN products p ON s.pid = p.id GROUP BY DATE(s.created_at) ORDER BY sale_date;")
-    profit_perday = cur.fetchall()
-    return profit_perday
+
+def profit_per_day():
+    cur.execute("""select sales.created_at as date,sum((products.selling_price - products.buying_price) * sales.quantity) as profit
+            from sales join products on sales.pid = products.id group by(date)
+                 """)
+    daily_profit = cur.fetchall()
+    return daily_profit
 
 # profit per product
-def get_profitsperday():
-    cur.execute("SELECT p.id, p.name, SUM((p.selling_price - p.buying_price) * s.quantity) AS total_profit FROM products p JOIN sales s ON p.id = s.pid GROUP BY p.id, p.name ORDER BY total_profit DESC;")
-    profit_perday = cur.fetchall()
-    return profit_perday
+
+def profit_per_product():
+    cur.execute("""select products.name as p_name, sum((products.selling_price - products.buying_price) * sales.quantity) as profit
+            from sales join products on sales.pid = products.id group by(p_name)
+                 """)
+    product_profit = cur.fetchall()
+    return product_profit
+
+
+
 
 
 

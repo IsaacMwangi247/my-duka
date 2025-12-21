@@ -12,16 +12,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
   <title>{% block title %} {% endblock %}</title>
   {% block style %} {% endblock %}
 
 </head>
 
-<body style="background-color: #e5e5e5;">
+<body style="background-color: #eef4ed;">
   <div class="container">
     <div>
       <nav class="navbar navbar-expand-lg"
-        style="border-radius: 40px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; background-color: aliceblue;">
+        style="border-radius: 40px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; background-color: #8da9c4">
         <div class="container-fluid">
           <!-- left -->
           <a class="navbar-brand" href="#">myDuka</a>
@@ -35,24 +37,31 @@
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#">Home</a>
               </li>
+              {% if not session.email %}
+
               <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:5000/register">Register</a>
+                <a class="nav-link" href="/register">Register</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:5000/login">Login</a>
+                <a class="nav-link" href="/login">Login</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="/products">Products</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:5000/products">Products</a>
+                <a class="nav-link" href="/sales">Sales</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:5000/sales">Sales</a>
+                <a class="nav-link" href="/stocks">Stocks</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:5000/stocks">Stocks</a>
+                <a class="nav-link" href="/dashboard">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:5000/dashboard">Dashboard</a>
+                <a class="nav-link" href="/logout">Logout</a>
               </li>
+              {% endif %}
             </ul>
           </div>
         </div>
@@ -78,7 +87,7 @@
 
 
 
-    <div style="margin-top: 40px">
+    <div>
       <!-- Footer -->
       <footer class="footer">
         <div class="container">
@@ -116,7 +125,7 @@
       <!-- Footer end-->
     </div>
   </div>
-
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
